@@ -11,8 +11,9 @@ int main()
     unsigned int ans = 0;
 
     xadd(ans, x, y);
-    print_int(ans, 10);
 
+    print_int(x, 10); print_str(" + "); print_int(y, 10); print_str(" = "); print_int(x+y, 10); print_str(" ( "); print_int(ans, 10); print_str(" )\n");
+    
     // Accurate Sum (t3)      = 2277564 (0x22c0bc)
     // Approximate Sum (t4)   = 2273468 (0x22b0bc)
     // Relative Error Percent = 0.17 %
