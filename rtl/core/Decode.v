@@ -26,7 +26,7 @@ module Decode
     output  reg             a_op_sel_o,
     output  reg             b_op_sel_o,
     output  reg             cmp_b_op_sel_o,
-    output  reg     [2:0]   alu_op_sel_o,
+    output  reg     [3:0]   alu_op_sel_o,
     output  wire    [2:0]   mem_access_width_o,
     output  reg             d_mem_load_store,
     output  reg             mem_we_o
@@ -418,6 +418,47 @@ always @(*) begin
             b_op_sel_o = 1'b0;
             alu_op_sel_o = `__ALU_AND__;
         end
+        //========================================
+        /* X - XCONF    
+        17'b0000000_000_0001011: 
+        begin
+            rf_we_o = 1'b1;
+            rf_din_sel_o = 3'd2;
+            a_op_sel_o = 1'b0;
+            b_op_sel_o = 1'b0;
+            alu_op_sel_o = `__ALU_X_CONF__;
+        end*/
+
+        /* X - XADD   */ 
+        17'b0000000_001_0001011: 
+        begin
+            rf_we_o = 1'b1;
+            rf_din_sel_o = 3'd2;
+            a_op_sel_o = 1'b0;
+            b_op_sel_o = 1'b0;
+            alu_op_sel_o = `__ALU_X_ADD__;
+        end
+
+        /* X - XMUL   */ 
+        17'b0000000_010_0001011: 
+        begin
+            rf_we_o = 1'b1;
+            rf_din_sel_o = 3'd2;
+            a_op_sel_o = 1'b0;
+            b_op_sel_o = 1'b0;
+            alu_op_sel_o = `__ALU_X_MUL__;
+        end
+        
+        /* X - XMAC   
+        17'b0000000_011_0001011: 
+        begin
+            rf_we_o = 1'b1;
+            rf_din_sel_o = 3'd2;
+            a_op_sel_o = 1'b0;
+            b_op_sel_o = 1'b0;
+            alu_op_sel_o = `__ALU_X_MAC__;
+        end*/
+
 
         default: begin
             jump_en_o = 0;

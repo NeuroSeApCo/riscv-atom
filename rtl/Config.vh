@@ -11,14 +11,19 @@
 `define __J_IMMIDIATE__ 3'd4
 
 // ALU
-`define __ALU_ADD__ 3'd0
-`define __ALU_SUB__ 3'd1
-`define __ALU_XOR__ 3'd2
-`define __ALU_OR__  3'd3
-`define __ALU_AND__ 3'd4
-`define __ALU_SLL__ 3'd5
-`define __ALU_SRL__ 3'd6
-`define __ALU_SRA__ 3'd7
+`define __ALU_ADD__ 4'd0
+`define __ALU_SUB__ 4'd1
+`define __ALU_XOR__ 4'd2
+`define __ALU_OR__  4'd3
+`define __ALU_AND__ 4'd4
+`define __ALU_SLL__ 4'd5
+`define __ALU_SRL__ 4'd6
+`define __ALU_SRA__ 4'd7
+
+`define __ALU_X_CONF__ 4'd8
+`define __ALU_X_ADD__ 4'd9
+`define __ALU_X_MUL__ 4'd10
+`define __ALU_X_MAC__ 4'd11
 
 // COMPARATOR
 `define __CMP_UN__  3'd0
