@@ -1,4 +1,5 @@
-#include "axkit_ops.S"
+#include "../include/axkit.h"
+
 .global main
 
 .text
@@ -8,6 +9,7 @@ main:
     li t2, 43222
     add t3, t1, t2      
     xadd(t4, t2, t1) 
+
     # Accurate Sum (t3)      = 2277564 (0x22c0bc)
     # Approximate Sum (t4)   = 2273468 (0x22b0bc)
     # Relative Error Percent = 0.17 %

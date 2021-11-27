@@ -1,7 +1,7 @@
-#include "../../lib/atombones.h"
-#include "../../lib/stdio.h"
+#include "../../../lib/atombones.h"
+#include "../../../lib/stdio.h"
 
-#include "include/axkit.h"
+#include "../include/axkit.h"
 
 int main()
 {   

@@ -22,10 +22,10 @@
 #ifndef __AXKIT_H__
 #define __AXKIT_H__
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // General Definitions 
 
+#ifndef __ASSEMBLY__
 // Frequently used datatypes
 typedef unsigned char byte;
 
@@ -37,31 +37,52 @@ typedef unsigned int uint32;
 
 typedef long signed int int64;
 typedef long unsigned int uint64;
-
+#endif
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // Library-Level Macros
 
 // Configure Approximate Hardware
-#define xconf(device, conf)  \
-    __asm__ volatile (".insn r 0b0001011, 0b000, 0b0000000, %0, zero, %1" : "=r"(device) : "r"(conf))
+#ifdef __ASSEMBLY__
+    #define xconf(device, conf)  \
+        .insn r 0b0001011, 0b000, 0b0000000, device, zero, conf
+#else
+    #define xconf(device, conf)  \
+        __asm__ volatile (".insn r 0b0001011, 0b000, 0b0000000, %0, zero, %1" : "=r"(device) : "r"(conf))
+#endif
 
 // Approximate Add
-#define xadd(ans, x, y)   \
-    __asm__ volatile (".insn r 0b0001011, 0b001, 0b0000000, %0, %1, %2" : "=r"(ans) : "r"(x), "r"(y))
+#ifdef __ASSEMBLY__
+    #define xadd(ans, x, y)   \
+        .insn r 0b0001011, 0b001, 0b0000000, ans, x, y
+#else
+    #define xadd(ans, x, y)   \
+        __asm__ volatile (".insn r 0b0001011, 0b001, 0b0000000, %0, %1, %2" : "=r"(ans) : "r"(x), "r"(y))
+#endif
 
 // Aapproximate Multiply
-#define xmul(ans, x, y)   \
-    __asm__ volatile (".insn r 0b0001011, 0b010, 0b0000000, %0, %1, %2" : "=r"(ans) : "r"(x), "r"(y))
+#ifdef __ASSEMBLY__
+    #define xmul(ans, x, y)   \
+    .insn r 0b0001011, 0b010, 0b0000000, ans, x, y
+#else
+    #define xmul(ans, x, y)   \
+        __asm__ volatile (".insn r 0b0001011, 0b010, 0b0000000, %0, %1, %2" : "=r"(ans) : "r"(x), "r"(y))
+#endif
+
 
 // Approximate MAC
-#define xmac(ans, x, y)   \
-    __asm__ volatile (".insn r 0b0001011, 0b011, 0b0000000, %0, %1, %2" : "=r"(ans) : "r"(x), "r"(y))
-
+#ifdef __ASSEMBLY__
+    #define xmac(ans, x, y)   \
+        .insn r 0b0001011, 0b011, 0b0000000, ans, x, y
+#else
+    #define xmac(ans, x, y)   \
+        __asm__ volatile (".insn r 0b0001011, 0b011, 0b0000000, %0, %1, %2" : "=r"(ans) : "r"(x), "r"(y))
+#endif
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // Wrapper Functions for Library-Level macros
 
+#ifndef __ASSEMBLY__
 // Configure Approximate Hardware
 void xconf_f(uint32 device, uint32 conf)
 {    
@@ -89,6 +110,6 @@ void xmac_f(uint32 *acc, uint32 x, uint32 y)
 {    
     xmac(*acc, x, y);
 }
-
+#endif
 
 #endif //__AXKIT_H__
