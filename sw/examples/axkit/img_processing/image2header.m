@@ -1,12 +1,15 @@
 pkg load image
 
 % Take fresh image
-I = imread("lena128x128.png")
-I = imresize(I, 0.5)
+%I = imread("lena128x128.bmp")
+%I = imread("baboon128x128.bmp")
+I = imread("cameraman128x128.bmp")
+
+%I = imresize(I, 0.125)
 I = padarray(I,[2 2]);
 sz = size(I)
 
-fid = fopen ("lena.h", "w");
+fid = fopen ("input_image.h", "w");
 
 fprintf(fid, "unsigned int ibuf_vdim = %d;\n", sz(1));
 fprintf(fid, "unsigned int ibuf_hdim = %d;\n\n", sz(2));
@@ -21,7 +24,6 @@ for row=1:sz(1)
         else
             fprintf(fid, ",\n", I(row, col))
         endif
-        
     endfor
 endfor
 

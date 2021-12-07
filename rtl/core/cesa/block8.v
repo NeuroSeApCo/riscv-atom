@@ -27,7 +27,12 @@ module block8(a,b,cin,sum,cout);
 
 	assign cout=(~sel&&cout_post)||(sel&&cout_pre);
 
-	wire c1, c2, c3, c4, c5, c6, c7, c8;
+	wire c1, c2, c3, c4, c5, c6, c7;
+	
+	/* verilator lint_off UNUSED */
+	wire c8;
+	/* verilator lint_on UNUSED */
+
 
 	fulladder f0(a[0],b[0],cin,sum[0],c1);
 	fulladder f1(a[1],b[1],c1,sum[1],c2);

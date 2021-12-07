@@ -9,7 +9,7 @@
 
 `include "../Timescale.vh"
 
-`include "cesa/cesa32_4.v"
+`include "cesa/cesa32_8.v"
 `include "drum/DRUM4_16_u.v"
 
 module Alu
@@ -37,7 +37,7 @@ wire [31:0] xprod;
 //wire [32:0] x_add_b = (mac_mode_on ? Acc : B);
 
 // AxADD
-cesa32_4 xadder(A, B, xsum);
+cesa32_8 xadder(A, B, xsum);
 
 // AxMUL
 DRUM4_16_u xmult(A[15:0], A[15:0], xprod);
